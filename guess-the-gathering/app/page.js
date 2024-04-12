@@ -11,23 +11,35 @@ export default function Page() {
   const [card, setCard] = useState(null);
   const [foundCard, setFoundCard] = useState(false);
   const fetched = useRef(false);
+  const [isBlurVisible, setIsBlurVisible] = useState(true);
 
   const fetchCard = async () => {
     if (!fetched.current) {
       const fetchedCard = await fetchRandomCard();
       setCard(fetchedCard);
       fetched.current = true;
+    } else {
+      setCard(null);
+      fetched.current = false;
     }
   };
-
-  useEffect(() => {
-    fetchCard();
-  }, []);
+  const handleGetCard = async () => {
+    const newCard = await fetchRandomCard();
+    setCard(newCard);
+  };
+  // useEffect(() => {
+  //   fetchCard();
+  // }, []);
 
   useEffect(() => {
     if (card) {
       console.log(card);
-      setCardImageUrl(card.imageUrl);
+      if (!card.imageUrl) {
+        handleGetCard();
+      } else {
+        setCardImageUrl(card.imageUrl);
+        console.log(cardImageUrl);
+      }
     }
   }, [card]);
 
@@ -42,27 +54,11 @@ export default function Page() {
     "The Keyword(s)",
   ];
 
-  // useEffect(() => {
-  //   fetchCard();
-  //   setFoundCard(true);
-  // }, []);
-
-  // useEffect(() => {
-  //   if (foundCard) {
-  //     console.log("Card found");
-  //     if (card) {
-  //       console.log(card);
-  //       setCardImageUrl(card.imageUrl);
-  //       console.log(cardImageUrl);
-  //     }
-  //   }
-  // }, [card]);
-
   return (
-    <main className="tiffany min-h-screen font-beleren">
-      <div className="">
+    <main className="flex justify-center tiffany min-h-screen font-beleren">
+      <div className="mint h-11/12 custom-width mt-2 rounded-lg">
         <div className="flex flex-col justify-center items-center">
-          <h1 className="border-slate-800 border-2 text-5xl text-center w-11/12 mt-3 pr-16 p-8 rounded-2xl fairy-tail">
+          <h1 className="border-slate-800 border-2 text-5xl text-center w-11/12 mt-4 pr-16 p-8 rounded-2xl fairy-tail">
             Guess the Gathering
           </h1>
         </div>
@@ -73,21 +69,40 @@ export default function Page() {
             ))}
           </div>
         </div>
-      </div>
-      <div className="custom-height custom-width card-box ml-44 rounded-md mt-2">
-        <div className="flex justify-start ml-8">
-          <div className="h-96 w-72 bg-gray-600 border-slate-900 border-2 p-2 m-4">
-            <div>
-              {cardImageUrl && (
-                <Image
-                  className="rounded-xl"
-                  src={cardImageUrl}
-                  alt="Card"
-                  width={500}
-                  height={500}
-                  priority
-                />
-              )}
+        <div className="flex justify-center">
+          <div className="custom-height custom-width card-box rounded-md mt-2">
+            <div className="flex flex-col w-96 justify-center ml-8">
+              <div className="h-96 w-72 flex bg-gray-600 border-slate-900 border-2 p-2 m-4">
+                <div>
+                  {cardImageUrl && (
+                    <Image
+                      className="rounded-xl"
+                      src={cardImageUrl}
+                      alt="Card"
+                      width={500}
+                      height={500}
+                      priority
+                    />
+                  )}
+                  {isBlurVisible && (
+                    <div className="absolute h-6 w-44 name-blur inset-y-64 inset-x-42 rounded-xl"></div>
+                  )}
+                </div>
+              </div>
+              <div className="flex justify-center">
+                <button
+                  className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-xl mr-20"
+                  onClick={handleGetCard}
+                >
+                  Get Card
+                </button>
+                <button
+                  className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-xl mr-20"
+                  onClick={() => setIsBlurVisible(!isBlurVisible)}
+                >
+                  Toggle Blur
+                </button>
+              </div>
             </div>
           </div>
         </div>
