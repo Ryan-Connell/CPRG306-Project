@@ -1,38 +1,94 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import '../public/fonts.css';
+import "../public/fonts.css";
 import { fetchRandomCard } from "./card-caller/fetch-random";
+import GameTypes from "./game-types/game-type-list";
 
 export default function Page() {
   const [cardImageUrl, setCardImageUrl] = useState(null);
+  const [card, setCard] = useState(null);
+  const [foundCard, setFoundCard] = useState(false);
+  const fetched = useRef(false);
+
+  const fetchCard = async () => {
+    if (!fetched.current) {
+      const fetchedCard = await fetchRandomCard();
+      setCard(fetchedCard);
+      fetched.current = true;
+    }
+  };
 
   useEffect(() => {
-    const fetchCard = async () => {
-      const imageUrl = await fetchRandomCard();
-      setCardImageUrl(imageUrl);
-    };
-
     fetchCard();
   }, []);
 
+  useEffect(() => {
+    if (card) {
+      console.log(card);
+      setCardImageUrl(card.imageUrl);
+    }
+  }, [card]);
+
+  const gameTypes = [
+    "The Name",
+    "The Set",
+    "The Colour",
+    "The Mana Value",
+    "The Rarity",
+    "The Type",
+    "The Power/Toughness",
+    "The Keyword(s)",
+  ];
+
+  // useEffect(() => {
+  //   fetchCard();
+  //   setFoundCard(true);
+  // }, []);
+
+  // useEffect(() => {
+  //   if (foundCard) {
+  //     console.log("Card found");
+  //     if (card) {
+  //       console.log(card);
+  //       setCardImageUrl(card.imageUrl);
+  //       console.log(cardImageUrl);
+  //     }
+  //   }
+  // }, [card]);
+
   return (
-    <main className="flex justify-center bg-slate-600 min-h-screen">
-      <div className=" bg-slate-700 h-11/12 w-7/12 border-2 border-slate-800 rounded-2xl ">
-        <div className="flex flex-col justify-center items-center font-beleren">
-        
-          <h1 className="border-slate-800 bg-slate-700 border-2 text-4xl text-left w-11/12 mt-3 pl-16 pr-16 p-8 rounded-2xl">Guess the Gathering</h1>
-
+    <main className="tiffany min-h-screen font-beleren">
+      <div className="">
+        <div className="flex flex-col justify-center items-center">
+          <h1 className="border-slate-800 border-2 text-5xl text-center w-11/12 mt-3 pr-16 p-8 rounded-2xl fairy-tail">
+            Guess the Gathering
+          </h1>
         </div>
-        
-        {cardImageUrl && 
-        <Image  src={cardImageUrl} alt="Card" width={250} height={300} />}
-        
-        
+        <div className="flex justify-center">
+          <div className="flex justify-center w-10/12 dark-pink rounded-b-xl">
+            {gameTypes.map((gameType) => (
+              <GameTypes games={gameType} />
+            ))}
+          </div>
+        </div>
       </div>
-
+      <div className="custom-height custom-width card-box ml-36 rounded-md mt-2">
+        <div className="flex justify-start ml-8">
+          <div className="bg-gray-600 border-slate-900 border-2 rounded-xl p-2 m-4">
+            {cardImageUrl && (
+              <Image
+                className="rounded-xl"
+                src={cardImageUrl}
+                alt="Card"
+                width={250}
+                height={300}
+              />
+            )}
+          </div>
+        </div>
+      </div>
     </main>
-    
   );
 }

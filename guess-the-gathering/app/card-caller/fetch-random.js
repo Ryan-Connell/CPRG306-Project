@@ -1,19 +1,25 @@
 export async function fetchRandomCard() {
-    const totalCards = 10000;
-    const randomId = Math.floor(Math.random() * totalCards) + 1;
-    console.log(`Fetching card with id: ${randomId}`);
-    const response = await fetch(`https://api.magicthegathering.io/v1/cards/${randomId}`);
-  
+  let cardFound = false;
+  let data = null;
+
+  while (!cardFound) {
+    console.log(`Fetching a random card`);
+    const response = await fetch(
+      `https://api.magicthegathering.io/v1/cards?random=true&pageSize=1`
+    );
+
     if (response.ok) {
-      const data = await response.json();
-      if (data.card && data.card.imageUrl) {
-        return data.card.imageUrl;
+      data = await response.json();
+      if (data.cards && data.cards.length > 0) {
+        cardFound = true;
+        data.card = data.cards[0]; // Store the card in data.card for consistency with the previous function
       } else {
-        console.log('Image not found');
-        return null;
+        console.log("Card not found, retrying...");
       }
     } else {
-      console.log('Card not found');
-      return null;
+      console.log("Error fetching card, retrying...");
     }
   }
+
+  return data.card;
+}
