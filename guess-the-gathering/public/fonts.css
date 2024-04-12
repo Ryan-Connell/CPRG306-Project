@@ -5,3 +5,37 @@
     font-style: normal;
     font-display: swap;
   }
+  .custom-height {
+    height: 700px;
+}
+.custom-width {
+  width: 81%; /* Replace with your desired height */
+}
+.nav-bar {
+  /* background: linear-gradient(9deg, #0f5c3e 15%, #013220 35%, #228B22 55%, #006400 65%, #013220 100%); */
+  background-color: #333333;
+}
+.card-box {
+  background-blend-mode: multiply;
+  background-color: rgba(68, 42, 126, 0.7);
+  
+  box-shadow: silver 1px 1px 4px 0px;
+  
+}
+.hover-grow:hover {
+  transform: scale(1.10);
+  transition: transform 0.3s ease-in-out;
+}
+.turquoise {
+  background-color: #2bc0aa;
+}
+.tiffany{
+  background-color: #314241;
+}
+.dark-pink {
+  background-color: #96556e;
+  box-shadow: silver 1px 1px 4px 0px;
+}
+.fairy-tail{
+  background-color: #ca8aa3;
+}
