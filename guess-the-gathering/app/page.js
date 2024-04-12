@@ -74,18 +74,21 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="custom-height custom-width card-box ml-36 rounded-md mt-2">
+      <div className="custom-height custom-width card-box ml-44 rounded-md mt-2">
         <div className="flex justify-start ml-8">
-          <div className="bg-gray-600 border-slate-900 border-2 rounded-xl p-2 m-4">
-            {cardImageUrl && (
-              <Image
-                className="rounded-xl"
-                src={cardImageUrl}
-                alt="Card"
-                width={250}
-                height={300}
-              />
-            )}
+          <div className="h-96 w-72 bg-gray-600 border-slate-900 border-2 p-2 m-4">
+            <div>
+              {cardImageUrl && (
+                <Image
+                  className="rounded-xl"
+                  src={cardImageUrl}
+                  alt="Card"
+                  width={500}
+                  height={500}
+                  priority
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
