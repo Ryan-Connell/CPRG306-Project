@@ -9,7 +9,7 @@
     height: 700px;
 }
 .custom-width {
-  width: 81%; /* Replace with your desired height */
+  width: 91%; /* Replace with your desired height */
 }
 .nav-bar {
   /* background: linear-gradient(9deg, #0f5c3e 15%, #013220 35%, #228B22 55%, #006400 65%, #013220 100%); */
@@ -38,4 +38,13 @@
 }
 .fairy-tail{
   background-color: #ca8aa3;
+}
+.mint{
+  background-color: #3EB489;
+  box-shadow: silver 0px 0px 6px 0px;
+}
+.name-blur{
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+  margin-top: 27px;
+  margin-left: 16px;
 }
