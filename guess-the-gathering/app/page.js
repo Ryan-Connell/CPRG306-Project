@@ -1,35 +1,21 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import "../public/fonts.css";
+import "../public/custom-styles.css";
 import { fetchRandomCard } from "./card-caller/fetch-random";
 import GameTypes from "./game-types/game-type-list";
 
 export default function Page() {
   const [cardImageUrl, setCardImageUrl] = useState(null);
   const [card, setCard] = useState(null);
-  const [foundCard, setFoundCard] = useState(false);
-  const fetched = useRef(false);
   const [isBlurVisible, setIsBlurVisible] = useState(true);
 
-  const fetchCard = async () => {
-    if (!fetched.current) {
-      const fetchedCard = await fetchRandomCard();
-      setCard(fetchedCard);
-      fetched.current = true;
-    } else {
-      setCard(null);
-      fetched.current = false;
-    }
-  };
   const handleGetCard = async () => {
     const newCard = await fetchRandomCard();
     setCard(newCard);
   };
-  // useEffect(() => {
-  //   fetchCard();
-  // }, []);
 
   useEffect(() => {
     if (card) {
@@ -84,11 +70,38 @@ export default function Page() {
                       priority
                     />
                   )}
+                  {/* positioning blur divs */}
                   {isBlurVisible && (
-                    <div className="absolute h-6 w-44 name-blur inset-y-1 inset-x-42 rounded-xl"></div>
+                    // name blur
+                    <div className="absolute h-6 w-40 name-blur inset-y-1 inset-x-42 rounded-xl"></div>
+                  )}
+                  {isBlurVisible && (
+                    //  mana value blur
+                    <div className="absolute h-6 value-blur inset-y-1 inset-x-44 rounded-xl"></div>
+                  )}
+                  {isBlurVisible && (
+                    //  card type blur
+                    <div className="absolute h-6 type-blur inset-y-12 inset-x-42 rounded-xl"></div>
+                  )}
+                  {isBlurVisible && (
+                    //  set symbol blur
+                    <div className="absolute h-6 set-symbol-blur inset-y-12 inset-x-44 rounded-xl"></div>
+                  )}
+                  {isBlurVisible && (
+                    //  rule text type blur
+                    <div className="absolute rule-text-blur inset-y-12 inset-x-42 rounded-xl"></div>
+                  )}
+                  {isBlurVisible && (
+                    //  set code blur
+                    <div className="absolute h-6 set-code-blur inset-y-12 inset-x-42 rounded-xl"></div>
+                  )}
+                  {isBlurVisible && (
+                    //  power/toughness blur
+                    <div className="absolute h-6 pt-blur inset-y-12 inset-x-44 rounded-xl"></div>
                   )}
                 </div>
               </div>
+              {/* this section is for debugging purposes */}
               <div className="flex justify-center">
                 <button
                   className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-xl mr-20"
