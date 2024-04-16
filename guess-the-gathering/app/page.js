@@ -73,7 +73,7 @@ export default function Page() {
           <div className="custom-height custom-width card-box rounded-md mt-2">
             <div className="flex flex-col w-96 justify-center ml-8">
               <div className="h-96 w-72 flex bg-gray-600 border-slate-900 border-2 p-2 m-4">
-                <div>
+                <div className="relative">
                   {cardImageUrl && (
                     <Image
                       className="rounded-xl"
@@ -85,7 +85,7 @@ export default function Page() {
                     />
                   )}
                   {isBlurVisible && (
-                    <div className="absolute h-6 w-44 name-blur inset-y-64 inset-x-42 rounded-xl"></div>
+                    <div className="absolute h-6 w-44 name-blur inset-y-1 inset-x-42 rounded-xl"></div>
                   )}
                 </div>
               </div>
