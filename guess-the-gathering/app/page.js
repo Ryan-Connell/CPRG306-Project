@@ -9,6 +9,7 @@ import GameTypes from "./game-types/game-type-list";
 import PowTough from "./components/pow-tough";
 import CardName from "./components/card-name";
 import SetName from "./components/set";
+import ManaValue from "./components/mana-value";
 
 export default function Page() {
   const [cardImageUrl, setCardImageUrl] = useState(null);
@@ -130,6 +131,9 @@ export default function Page() {
               )}
               {selectedGameType === "The Set" && card && (
                 <SetName setCode={card.set} handleGetSet={handleGetCard} />
+              )}
+              {selectedGameType === "ManaValue" && card && (
+                <ManaValue manaCost={card.manaCost} />
               )}
               {selectedGameType === "Power/Toughness" && (
                 <div>
