@@ -9,7 +9,9 @@ export default function CardName({ card, handleGetCard }) {
   const [showCardName, setShowCardName] = useState(false);
 
   useEffect(() => {
-    initializeGame();
+    if (card) {
+      initializeGame();
+    }
   }, [card]);
 
   const initializeGame = () => {
@@ -33,6 +35,9 @@ export default function CardName({ card, handleGetCard }) {
 
   const handleLetterClick = (letter) => {
     const lowerCaseLetter = letter.toLowerCase();
+    if (!card) {
+      return;
+    }
     const cleanedCardName = card.name.toLowerCase().replace(/[\s']/g, ""); // Remove spaces and apostrophes
     if (!guessedLetters.includes(lowerCaseLetter)) {
       setGuessedLetters([...guessedLetters, lowerCaseLetter]);
