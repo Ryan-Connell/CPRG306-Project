@@ -7,6 +7,7 @@ import "../public/custom-styles.css";
 import { fetchRandomCard } from "./card-caller/fetch-random";
 import GameTypes from "./game-types/game-type-list";
 import PowTough from "./components/pow-tough";
+import CardName from "./components/card-name";
 
 export default function Page() {
   const [cardImageUrl, setCardImageUrl] = useState(null);
@@ -127,6 +128,11 @@ export default function Page() {
                 <div>
                   <PowTough card={card} />
                 </div>
+              )}
+            </div>
+            <div className="flex custom-width justify-center mt-48">
+              {selectedGameType === "Name" && (
+                <CardName card={card} handleGetCard={handleGetCard} />
               )}
             </div>
           </div>
