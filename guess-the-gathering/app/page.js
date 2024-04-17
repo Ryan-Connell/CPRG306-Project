@@ -6,6 +6,7 @@ import "../public/fonts.css";
 import "../public/custom-styles.css";
 import { fetchRandomCard } from "./card-caller/fetch-random";
 import GameTypes from "./game-types/game-type-list";
+import Names from "./components/name";
 
 export default function Page() {
   const [cardImageUrl, setCardImageUrl] = useState(null);
@@ -30,10 +31,10 @@ export default function Page() {
   }, [card]);
 
   const gameTypes = [
-    "The Name",
+    "Name",
     "The Set",
     "The Colour",
-    "The Mana Value",
+    "ManaValue",
     "The Rarity",
     "The Type",
     "The Power/Toughness",
@@ -56,6 +57,7 @@ export default function Page() {
           </div>
         </div>
         <div className="flex justify-center">
+          {/* purple box area */}
           <div className="custom-height custom-width card-box rounded-md mt-2">
             <div className="flex flex-col w-96 justify-center ml-8">
               <div className="h-96 w-72 flex bg-gray-600 border-slate-900 border-2 p-2 m-4">
@@ -119,6 +121,7 @@ export default function Page() {
             </div>
           </div>
         </div>
+        <p> </p>
       </div>
     </main>
   );
