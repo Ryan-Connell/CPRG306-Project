@@ -6,12 +6,13 @@ import "../public/fonts.css";
 import "../public/custom-styles.css";
 import { fetchRandomCard } from "./card-caller/fetch-random";
 import GameTypes from "./game-types/game-type-list";
-import Names from "./components/name";
+import PowTough from "./components/pow-tough";
 
 export default function Page() {
   const [cardImageUrl, setCardImageUrl] = useState(null);
   const [card, setCard] = useState(null);
   const [isBlurVisible, setIsBlurVisible] = useState(true);
+  const [selectedGameType, setSelectedGameType] = useState(null);
 
   const handleGetCard = async () => {
     const newCard = await fetchRandomCard();
@@ -33,12 +34,10 @@ export default function Page() {
   const gameTypes = [
     "Name",
     "The Set",
-    "The Colour",
     "ManaValue",
     "The Rarity",
     "The Type",
-    "The Power/Toughness",
-    "The Keyword(s)",
+    "Power/Toughness",
   ];
 
   return (
@@ -52,14 +51,18 @@ export default function Page() {
         <div className="flex justify-center">
           <div className="flex justify-center w-10/12 dark-pink rounded-b-xl">
             {gameTypes.map((gameType) => (
-              <GameTypes games={gameType} />
+              <GameTypes
+                key={gameType}
+                games={gameType}
+                onClick={() => setSelectedGameType(gameType)}
+              />
             ))}
           </div>
         </div>
         <div className="flex justify-center">
           {/* purple box area */}
-          <div className="custom-height custom-width card-box rounded-md mt-2">
-            <div className="flex flex-col w-96 justify-center ml-8">
+          <div className="card-box rounded-md mt-2">
+            <div className="flex flex-col w-96 ml-8">
               <div className="h-96 w-72 flex bg-gray-600 border-slate-900 border-2 p-2 m-4">
                 <div className="relative">
                   {cardImageUrl && (
@@ -104,20 +107,27 @@ export default function Page() {
                 </div>
               </div>
               {/* this section is for debugging purposes */}
-              <div className="flex justify-center">
+              <div className="flex">
                 <button
-                  className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-xl mr-20"
+                  className="bg-slate-900 hover:bg-slate-800 w-40 text-white font-bold py-2 px-4 rounded-xl mr-16"
                   onClick={handleGetCard}
                 >
                   Get Card
                 </button>
                 <button
-                  className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-xl mr-20"
+                  className="bg-slate-900 hover:bg-slate-800 w-40 text-white font-bold py-2 px-4 rounded-xl"
                   onClick={() => setIsBlurVisible(!isBlurVisible)}
                 >
                   Toggle Blur
                 </button>
               </div>
+            </div>
+            <div className="flex custom-width justify-center mt-48">
+              {selectedGameType === "Power/Toughness" && (
+                <div>
+                  <PowTough card={card} />
+                </div>
+              )}
             </div>
           </div>
         </div>
