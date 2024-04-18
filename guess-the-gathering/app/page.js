@@ -10,18 +10,35 @@ import PowTough from "./components/pow-tough";
 import CardName from "./components/card-name";
 import SetName from "./components/set";
 import ManaValue from "./components/mana-value";
-
+import blackManaImage from "../public/images/swamp.png";
+import redManaImage from "../public/images/mountain.png";
+import greenManaImage from "../public/images/forest.png";
+import blueManaImage from "../public/images/island.png";
+import whiteManaImage from "../public/images/plains.png";
+import mtgLogo from "../public/images/mtg.png";
+const manaImages = {
+  B: blackManaImage,
+  R: redManaImage,
+  G: greenManaImage,
+  U: blueManaImage,
+  W: whiteManaImage,
+};
 export default function Page() {
   const [cardImageUrl, setCardImageUrl] = useState(null);
   const [card, setCard] = useState(null);
   const [isBlurVisible, setIsBlurVisible] = useState(true);
   const [selectedGameType, setSelectedGameType] = useState(null);
+  const [manaStyle, setManaStyle] = useState("");
 
   const handleGetCard = async () => {
     const newCard = await fetchRandomCard();
     setCard(newCard);
   };
-
+  function handleManaClick(manaType) {
+    setManaStyle(" ");
+    setManaStyle(manaType);
+    console.log(manaStyle);
+  }
   useEffect(() => {
     if (card) {
       console.log(card);
@@ -36,23 +53,22 @@ export default function Page() {
 
   const gameTypes = [
     "Name",
-    "The Set",
+    "Set",
     "ManaValue",
-    "The Rarity",
-    "The Type",
+    "Rarity",
+    "Type",
     "Power/Toughness",
   ];
 
   return (
     <main className="flex justify-center tiffany min-h-screen font-beleren">
-      <div className="mint h-11/12 custom-width mt-2 rounded-lg">
-        <div className="flex flex-col justify-center items-center">
-          <h1 className="border-slate-800 border-2 text-5xl text-center w-11/12 mt-4 pr-16 p-8 rounded-2xl fairy-tail">
-            Guess the Gathering
-          </h1>
+      <div className="flex flex-col mint custom-width mt-2 rounded-lg">
+        <div className="border-slate-800 border-2 text-center custom-width mt-4 ml-20 p-4 rounded-2xl fairy-tail flex justify-center items-center">
+          <Image className="mr-8 w-16 h-16" src={mtgLogo} alt="MTG Logo" />
+          <h1 className="text-5xl">Guess the Gathering</h1>
         </div>
         <div className="flex justify-center">
-          <div className="flex justify-center w-10/12 dark-pink rounded-b-xl">
+          <div className="flex justify-center w-10/12 ml-6 dark-pink rounded-b-xl">
             {gameTypes.map((gameType) => (
               <GameTypes
                 key={gameType}
@@ -125,21 +141,43 @@ export default function Page() {
                 </button>
               </div>
             </div>
-            <div className="flex custom-width justify-center mt-48">
+            <div className="flex flex-col">
+              <button onClick={() => handleManaClick("swamp")}>
+                <Image className="pip" src={blackManaImage} alt="Black Mana" />
+              </button>
+              <button onClick={() => handleManaClick("mountain")}>
+                <Image className="pip" src={redManaImage} alt="Red Mana" />
+              </button>
+              <button onClick={() => handleManaClick("forest")}>
+                <Image className="pip" src={greenManaImage} alt="Green Mana" />
+              </button>
+              <button onClick={() => handleManaClick("island")}>
+                <Image className="pip" src={blueManaImage} alt="Blue Mana" />
+              </button>
+              <button onClick={() => handleManaClick("plains")}>
+                <Image className="pip" src={whiteManaImage} alt="White Mana" />
+              </button>
+            </div>
+            <div className="flex custom-width justify-center mt-16">
               {selectedGameType === "Name" && (
                 <CardName card={card} handleGetCard={handleGetCard} />
               )}
-              {selectedGameType === "The Set" && card && (
-                <SetName setCode={card.set} handleGetSet={handleGetCard} />
+              {selectedGameType === "Set" && card && (
+                <SetName setCode={card.setName} handleGetSet={handleGetCard} />
               )}
               {selectedGameType === "ManaValue" && card && (
                 <ManaValue manaCost={card.manaCost} />
               )}
               {selectedGameType === "Power/Toughness" && (
-                <div>
-                  <PowTough card={card} handleGetCard={handleGetCard} />
-                </div>
+                <PowTough card={card} handleGetCard={handleGetCard} />
               )}
+            </div>
+            <div>
+              {/* <Image className="pip" src={blackManaImage} alt="Black Mana" />
+              <Image className="pip" src={redManaImage} alt="Red Mana" />
+              <Image className="pip" src={greenManaImage} alt="Green Mana" />
+              <Image className="pip" src={blueManaImage} alt="Blue Mana" />
+              <Image className="pip" src={whiteManaImage} alt="White Mana" /> */}
             </div>
           </div>
         </div>

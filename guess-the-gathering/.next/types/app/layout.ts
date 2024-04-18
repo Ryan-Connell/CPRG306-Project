@@ -1,4 +1,4 @@
-// File: C:\Users\djgal\School\Semester 3\Mobile App\CPRG306-Project\guess-the-gathering\app\layout.js
+// File: D:\SAIT\Winter 2024\WebDev2_CPRG306\CPRG306-Project\guess-the-gathering\app\layout.js
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

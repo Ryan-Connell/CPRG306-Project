@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-export default function ManaValue({ manaCost }) {
+export default function ManaValue({
+  manaCost,
+  swamp,
+  mountain,
+  forest,
+  island,
+  plains,
+}) {
   const [manaValueChars, setManaValueChars] = useState([]);
 
   useEffect(() => {

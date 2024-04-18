@@ -97,3 +97,8 @@
 .name-dashes{
     margin-left: 4px;
 }
+.pip{
+  width: 50px;
+  height: 50px;
+  margin: 18px;
+}
