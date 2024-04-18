@@ -25,19 +25,19 @@ export default function PowTough({ card, handleGetCard }) {
     setRemainingAttempts(remainingAttempts - 1);
     const powerResult =
       powerGuess > card.power
-        ? "high"
+        ? "Too High"
         : powerGuess < card.power
-        ? "low"
-        : "correct";
+        ? "Too Low"
+        : "Correct";
     const toughnessResult =
       toughnessGuess > card.toughness
-        ? "high"
+        ? "Too High"
         : toughnessGuess < card.toughness
-        ? "low"
-        : "correct";
+        ? "Too Low"
+        : "Correct";
     setResult(`Power: ${powerResult}, Toughness: ${toughnessResult}`);
     // Check if both guesses are correct
-    if (powerResult === "correct" && toughnessResult === "correct") {
+    if (powerResult === "Correct" && toughnessResult === "Correct") {
       setShowResult(true);
     }
 
@@ -48,57 +48,64 @@ export default function PowTough({ card, handleGetCard }) {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <h1 className="text-green-200 text-center text-2xl">
+    <div>
+      <h1 className="font-bold p-4 py-2 px-4 mint-text text-center text-5xl">
         Guess the Power/Toughness
       </h1>
-      <div className="mt-4">
-        <input
-          className="text-black text-center w-12 mr-1 border-2 border-slate-800 rounded-xl"
-          type="number"
-          min="0"
-          value={powerGuess}
-          onChange={(e) => setPowerGuess(e.target.value)}
-          placeholder="Guess Power"
-        />
-        /
-        <input
-          className="text-black text-center w-12 ml-1 border-2 border-slate-800 rounded-xl"
-          type="number"
-          min="0"
-          value={toughnessGuess}
-          onChange={(e) => setToughnessGuess(e.target.value)}
-          placeholder="Guess Toughness"
-        />
-      </div>
-      {!showResult && (
-        <button
-          className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-xl mt-4"
-          onClick={checkGuess}
-        >
-          Check Guess
-        </button>
-      )}
-
-      {(showResult || remainingAttempts === 0) && (
-        <button
-          className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-xl mt-4"
-          onClick={initializeGame}
-        >
-          Next Card
-        </button>
-      )}
-      <p className="text-black text-center mt-4">{result}</p>
-      <p className="text-black text-center mt-4">
-        Remaining Attempts: {remainingAttempts}
-      </p>
-      {showResult && (
-        <div className="flex justify-center bg-gray-300 mt-4 p-2 rounded-lg">
-          <p className="text-black text-center">{card.power}</p>
-          <p className="text-black text-center ml-1 mr-1">/</p>
-          <p className="text-black text-center">{card.toughness}</p>
+      <div className="flex flex-col justify-center items-center mt-32">
+        <div className="mt-4">
+          <input
+            className="text-black text-center w-12 mr-1 border-2 border-slate-800 rounded-xl"
+            type="number"
+            min="0"
+            value={powerGuess}
+            onChange={(e) => setPowerGuess(e.target.value)}
+            placeholder="Guess Power"
+          />
+          /
+          <input
+            className="text-black text-center w-12 ml-1 border-2 border-slate-800 rounded-xl"
+            type="number"
+            min="0"
+            value={toughnessGuess}
+            onChange={(e) => setToughnessGuess(e.target.value)}
+            placeholder="Guess Toughness"
+          />
         </div>
-      )}
+        {!showResult && remainingAttempts > 0 && (
+          <div className="flex flex-col justify-center">
+            <button
+              className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-xl mt-4"
+              onClick={checkGuess}
+            >
+              Check Guess
+            </button>
+            <p className="text-black text-center mt-4">
+              Remaining Attempts: {remainingAttempts}
+            </p>
+          </div>
+        )}
+
+        {(showResult || remainingAttempts === 0) && (
+          <button
+            className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-xl mt-4"
+            onClick={initializeGame}
+          >
+            Next Card
+          </button>
+        )}
+        <p className="text-black text-center mt-4">{result}</p>
+
+        {(showResult || remainingAttempts === 0) && (
+          <div className="flex justify-center pow-tough-box mt-4 rounded-lg text-l font-bold">
+            <div className="absolute thin-black-line"></div>
+            <p className="text-black text-center ">{card.power}</p>
+            <p className="text-black text-center ml-1 mr-1">/</p>
+            <p className="text-black text-center">{card.toughness}</p>
+            <div className="absolute thin-white-line"></div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

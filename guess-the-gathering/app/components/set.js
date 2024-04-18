@@ -69,7 +69,7 @@ export default function SetName({ setCode, handleGetSet }) {
     return (
       <div className="hangman-word">
         {guesses.map((letter, index) => (
-          <span key={index} className="hangman-letter">
+          <span key={index} className="mr-1 hangman-letter">
             {letter}
           </span>
         ))}
