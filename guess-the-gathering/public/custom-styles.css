@@ -10,10 +10,12 @@
 }
 .card-box {
     display: flex;
-  background-blend-mode: multiply;
-  background-color: rgba(68, 42, 126, 0.7);
+  background-image: url('/images/45-degree-fabric-light.png');
+  background-blend-mode: hard-light;
+  background-color: rgba(68, 42, 126, 0.95);
+  border-bottom: 1px solid #000;
   height: 700px;
-  box-shadow: silver 1px 1px 4px 0px;
+  box-shadow: silver 2px 1px 4px 0px;
   width: 91%;
 }
 .hover-grow:hover {
@@ -22,20 +24,34 @@
 }
 .turquoise {
   background-color: #2bc0aa;
+  background-image: url('/images/45-degree-fabric-light.png');
+  background-blend-mode: multiply;
 }
 .tiffany{
   background-color: #314241;
+  background-blend-mode: hard-light;
+  background-image: url('/images/wood.png');
 }
 .dark-pink {
   background-color: #96556e;
-  box-shadow: silver 1px 1px 4px 0px;
+  /* box-shadow: silver 1px 1px 4px 0px; */
+  background-image: url('/images/45-degree-fabric-light.png');
+  background-blend-mode: hard-light;
+  border-left: 1px solid #000; /* Adjust as needed */
+  border-right: 1px solid #000; /* Adjust as needed */
+  border-bottom: 1px solid #000; /* Adjust as needed */
 }
 .fairy-tail{
   background-color: #ca8aa3;
+  background-image: url('/images/45-degree-fabric-light.png');
+  background-blend-mode: difference;
 }
 .mint{
   background-color: #3EB489;
-  box-shadow: silver 0px 0px 6px 0px;
+  margin-bottom: 4px;
+  background-image: url('/images/45-degree-fabric-light.png');
+  background-blend-mode: hard-light;
+  border-bottom: 2px solid #000;
 }
 .name-blur{
   background-color: rgb(17 24 39 / var(--tw-bg-opacity));
