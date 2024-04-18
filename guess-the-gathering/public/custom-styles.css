@@ -104,3 +104,10 @@
   height: 50px;
   margin: 18px;
 }
+@media (max-width: 760px) {
+  .card-box, .mint, .dark-pink, .fairy-tail, .turquoise, .tiffany {
+    height: auto; /* Adjust as needed */
+    width: 100%; /* Adjust as needed */
+    min-width: 0; /* Adjust as needed */
+  }
+}

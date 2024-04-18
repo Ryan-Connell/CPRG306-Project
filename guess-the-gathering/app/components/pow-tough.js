@@ -48,7 +48,7 @@ export default function PowTough({ card, handleGetCard }) {
   };
 
   return (
-    <div>
+    <div className="min-h-96 min-w-12">
       <h1 className="font-bold p-4 py-2 px-4 mint-text text-center text-5xl">
         Guess the Power/Toughness
       </h1>
