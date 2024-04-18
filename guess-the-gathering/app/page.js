@@ -63,7 +63,7 @@ export default function Page() {
   return (
     <main className="flex justify-center tiffany min-h-screen font-beleren">
       <div className="flex flex-col mint custom-width mt-2 rounded-lg">
-        <div className="border-slate-800 border-2 text-center custom-width mt-4 ml-20 p-4 rounded-2xl fairy-tail flex justify-center items-center">
+        <div className="text-center custom-width mt-4 ml-20 p-4 rounded-2xl fairy-tail flex justify-center items-center">
           <Image className="mr-8 w-16 h-16" src={mtgLogo} alt="MTG Logo" />
           <h1 className="text-5xl">Guess the Gathering</h1>
         </div>
