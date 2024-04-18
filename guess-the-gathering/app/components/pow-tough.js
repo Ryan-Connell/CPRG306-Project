@@ -1,11 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function PowTough({ card, onClick }) {
+export default function PowTough({ card, handleGetCard }) {
+  const [remainingAttempts, setRemainingAttempts] = useState(3);
   const [powerGuess, setPowerGuess] = useState(0);
   const [toughnessGuess, setToughnessGuess] = useState(0);
   const [result, setResult] = useState("");
+  const [showResult, setShowResult] = useState(false);
+  useEffect(() => {
+    if (!card) {
+      initializeGame();
+    }
+  }, []);
+  const initializeGame = () => {
+    handleGetCard();
+    setPowerGuess(0);
+    setRemainingAttempts(3);
+    setToughnessGuess(0);
+    setResult("");
+    setShowResult(false);
+  };
 
   const checkGuess = () => {
+    // Decrement remainingAttempts
+    setRemainingAttempts(remainingAttempts - 1);
     const powerResult =
       powerGuess > card.power
         ? "high"
@@ -19,6 +36,15 @@ export default function PowTough({ card, onClick }) {
         ? "low"
         : "correct";
     setResult(`Power: ${powerResult}, Toughness: ${toughnessResult}`);
+    // Check if both guesses are correct
+    if (powerResult === "correct" && toughnessResult === "correct") {
+      setShowResult(true);
+    }
+
+    // Check if remainingAttempts has hit 0
+    if (remainingAttempts === 0) {
+      initializeGame();
+    }
   };
 
   return (
@@ -45,18 +71,34 @@ export default function PowTough({ card, onClick }) {
           placeholder="Guess Toughness"
         />
       </div>
+      {!showResult && (
+        <button
+          className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-xl mt-4"
+          onClick={checkGuess}
+        >
+          Check Guess
+        </button>
+      )}
 
-      <button
-        className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-xl mt-4"
-        onClick={checkGuess}
-      >
-        Check Guess
-      </button>
+      {(showResult || remainingAttempts === 0) && (
+        <button
+          className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-xl mt-4"
+          onClick={initializeGame}
+        >
+          Next Card
+        </button>
+      )}
       <p className="text-black text-center mt-4">{result}</p>
-      <div className="flex">
-        <h1 className="invisible">Power: {card.power}</h1>
-        <h1 className="invisible">Toughness: {card.toughness}</h1>
-      </div>
+      <p className="text-black text-center mt-4">
+        Remaining Attempts: {remainingAttempts}
+      </p>
+      {showResult && (
+        <div className="flex justify-center bg-gray-300 mt-4 p-2 rounded-lg">
+          <p className="text-black text-center">{card.power}</p>
+          <p className="text-black text-center ml-1 mr-1">/</p>
+          <p className="text-black text-center">{card.toughness}</p>
+        </div>
+      )}
     </div>
   );
 }

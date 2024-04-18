@@ -137,7 +137,7 @@ export default function Page() {
               )}
               {selectedGameType === "Power/Toughness" && (
                 <div>
-                  <PowTough card={card} />
+                  <PowTough card={card} handleGetCard={handleGetCard} />
                 </div>
               )}
             </div>
