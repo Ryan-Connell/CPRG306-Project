@@ -55,7 +55,7 @@ export default function PowTough({ card, handleGetCard }) {
       <div className="flex flex-col justify-center items-center mt-32">
         <div className="mt-4">
           <input
-            className="text-black text-center w-12 mr-1 border-2 border-slate-800 rounded-xl"
+            className="text-black text-xl text-center w-20 h-8 mr-1 border-2 border-slate-800 rounded-xl"
             type="number"
             min="0"
             value={powerGuess}
@@ -64,7 +64,7 @@ export default function PowTough({ card, handleGetCard }) {
           />
           /
           <input
-            className="text-black text-center w-12 ml-1 border-2 border-slate-800 rounded-xl"
+            className="text-black text-xl text-center w-20 h-8 ml-1 border-2 border-slate-800 rounded-xl"
             type="number"
             min="0"
             value={toughnessGuess}

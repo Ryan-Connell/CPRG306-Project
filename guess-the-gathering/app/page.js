@@ -23,6 +23,9 @@ export default function Page() {
     const newCard = await fetchRandomCard();
     setCard(newCard);
   };
+  function handlePageReset() {
+    window.location.reload();
+  }
 
   useEffect(() => {
     if (card) {
@@ -34,13 +37,15 @@ export default function Page() {
     }
   }, [card]);
 
-  const gameTypes = ["Name", "Set", "ManaValue", "Type", "Power/Toughness"];
+  const gameTypes = ["Name", "Set", "Mana Value", "Type", "Power/Toughness"];
 
   return (
     <main className="flex justify-center tiffany min-h-screen font-beleren">
       <div className="flex flex-col mint custom-width mt-2 rounded-lg">
         <div className="text-center custom-width mt-4 ml-20 p-4 rounded-2xl fairy-tail flex justify-center items-center">
-          <Image className="mr-8 w-16 h-16" src={mtgLogo} alt="MTG Logo" />
+          <button onClick={() => handlePageReset()}>
+            <Image className="mr-8 w-16 h-16" src={mtgLogo} alt="MTG Logo" />
+          </button>
           <h1 className="text-5xl">Guess the Gathering</h1>
         </div>
         <div className="flex justify-center">
@@ -127,7 +132,7 @@ export default function Page() {
               {selectedGameType === "Power/Toughness" && (
                 <PowTough card={card} handleGetCard={handleGetCard} />
               )}
-              {selectedGameType === "ManaValue" && (
+              {selectedGameType === "Mana Value" && (
                 <ManaValue
                   manaCost={card ? card.manaCost : ""}
                   selectedGameType={selectedGameType}

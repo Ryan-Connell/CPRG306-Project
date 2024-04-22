@@ -110,7 +110,7 @@ export default function SetName({ setCode, handleGetSet }) {
                 ? setCode.toLowerCase().includes(letter)
                   ? "#4CAF50"
                   : "#FF0000"
-                : "#cccccc",
+                : "#1E293B",
               borderRadius: "50%",
               width: "40px",
               height: "40px",
@@ -129,30 +129,32 @@ export default function SetName({ setCode, handleGetSet }) {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <h1 className="text-green-200 text-center text-2xl">
-        Guess the Set Code
+    <div className="min-h-96 min-w-12">
+      <h1 className="font-bold p-4 py-2 px-4 mint-text text-center text-5xl">
+        Guess the Set
       </h1>
-      <div className="mt-4">{renderHangmanWord()}</div>
-      <div className="mt-4">{renderAlphabet()}</div>
-      <p className="text-black text-center mt-4">{result}</p>
-      <p className="text-black text-center mt-4">
-        Remaining Attempts: {remainingAttempts}
-      </p>
-      {showSetName && (
-        <div className="mt-4">
-          <p className="text-black text-center">
-            {isCorrectSet ? (
-              <>
-                Congratulations! You guessed the correct set:{" "}
-                {setCode.toUpperCase()}
-              </>
-            ) : (
-              <>The correct set code is: {setCode.toUpperCase()}</>
-            )}
-          </p>
-        </div>
-      )}
+      <div className="flex flex-col justify-center items-center mt-32">
+        <div className="mt-4 embiggen">{renderHangmanWord()}</div>
+        <div className="mt-4 text-2xl">{renderAlphabet()}</div>
+        <p className="text-black text-center mt-4">{result}</p>
+        <p className="text-black text-center mt-4">
+          Remaining Attempts: {remainingAttempts}
+        </p>
+        {showSetName && (
+          <div className="mt-4">
+            <p className="text-black text-center">
+              {isCorrectSet ? (
+                <>
+                  Congratulations! You guessed the correct set:{" "}
+                  {setCode.toUpperCase()}
+                </>
+              ) : (
+                <>The correct set code is: {setCode.toUpperCase()}</>
+              )}
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

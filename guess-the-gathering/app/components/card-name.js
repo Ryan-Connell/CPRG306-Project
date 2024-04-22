@@ -109,7 +109,7 @@ export default function CardName({ card, handleGetCard }) {
                 ? card.name.toLowerCase().includes(letter)
                   ? "#4CAF50"
                   : "#FF0000"
-                : "#cccccc",
+                : "#1E293B",
               borderRadius: "50%",
               width: "40px",
               height: "40px",
@@ -132,22 +132,26 @@ export default function CardName({ card, handleGetCard }) {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <h1 className="text-green-200 text-center text-2xl">Guess the Name</h1>
-      <div className="mt-4">{renderHangmanWord()}</div>
-      <div className="mt-4">{renderAlphabet()}</div>
-      <div className="mt-4">{renderIncorrectGuesses()}</div>
-      <p className="text-black text-center mt-4">{result}</p>
-      <p className="text-black text-center mt-4">
-        Remaining Attempts: {remainingAttempts}
-      </p>
-      {showCardName && (
-        <div className="mt-4">
-          <p className="text-black text-center">
-            The correct name is: {card.name}
-          </p>
-        </div>
-      )}
+    <div className="min-h-96 min-w-12">
+      <h1 className="font-bold p-4 py-2 px-4 mint-text text-center text-5xl">
+        Guess the Name
+      </h1>
+      <div className="flex flex-col justify-center items-center mt-32">
+        <div className="mt-4 embiggen">{renderHangmanWord()}</div>
+        <div className="mt-4 text-2xl">{renderAlphabet()}</div>
+        <div className="mt-4">{renderIncorrectGuesses()}</div>
+        <p className="text-black text-center mt-4">{result}</p>
+        <p className="text-black text-center mt-4">
+          Remaining Attempts: {remainingAttempts}
+        </p>
+        {showCardName && (
+          <div className="mt-4">
+            <p className="text-black text-center">
+              The correct name is: {card.name}
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
