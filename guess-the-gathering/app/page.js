@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import "../public/fonts.css";
 import "../public/custom-styles.css";
@@ -10,43 +10,25 @@ import PowTough from "./components/pow-tough";
 import CardName from "./components/card-name";
 import SetName from "./components/set";
 import ManaValue from "./components/mana-value";
-import blackManaImage from "../public/images/swamp.png";
-import redManaImage from "../public/images/mountain.png";
-import greenManaImage from "../public/images/forest.png";
-import blueManaImage from "../public/images/island.png";
-import whiteManaImage from "../public/images/plains.png";
 import mtgLogo from "../public/images/mtg.png";
-const manaImages = {
-  B: blackManaImage,
-  R: redManaImage,
-  G: greenManaImage,
-  U: blueManaImage,
-  W: whiteManaImage,
-};
+
 export default function Page() {
   const [cardImageUrl, setCardImageUrl] = useState(null);
   const [card, setCard] = useState(null);
   const [isBlurVisible, setIsBlurVisible] = useState(true);
   const [selectedGameType, setSelectedGameType] = useState(null);
-  const [manaStyle, setManaStyle] = useState("");
 
   const handleGetCard = async () => {
     const newCard = await fetchRandomCard();
     setCard(newCard);
   };
-  function handleManaClick(manaType) {
-    setManaStyle(" ");
-    setManaStyle(manaType);
-    console.log(manaStyle);
-  }
+
   useEffect(() => {
     if (card) {
-      console.log(card);
       if (!card.imageUrl) {
         handleGetCard();
       } else {
         setCardImageUrl(card.imageUrl);
-        console.log(cardImageUrl);
       }
     }
   }, [card]);
@@ -141,23 +123,6 @@ export default function Page() {
                 </button>
               </div>
             </div>
-            <div className="flex flex-col">
-              <button onClick={() => handleManaClick("swamp")}>
-                <Image className="pip" src={blackManaImage} alt="Black Mana" />
-              </button>
-              <button onClick={() => handleManaClick("mountain")}>
-                <Image className="pip" src={redManaImage} alt="Red Mana" />
-              </button>
-              <button onClick={() => handleManaClick("forest")}>
-                <Image className="pip" src={greenManaImage} alt="Green Mana" />
-              </button>
-              <button onClick={() => handleManaClick("island")}>
-                <Image className="pip" src={blueManaImage} alt="Blue Mana" />
-              </button>
-              <button onClick={() => handleManaClick("plains")}>
-                <Image className="pip" src={whiteManaImage} alt="White Mana" />
-              </button>
-            </div>
             <div className="flex custom-width justify-center mt-16">
               {selectedGameType === "Name" && (
                 <CardName card={card} handleGetCard={handleGetCard} />
@@ -165,19 +130,16 @@ export default function Page() {
               {selectedGameType === "Set" && card && (
                 <SetName setCode={card.setName} handleGetSet={handleGetCard} />
               )}
-              {selectedGameType === "ManaValue" && card && (
-                <ManaValue manaCost={card.manaCost} />
-              )}
               {selectedGameType === "Power/Toughness" && (
                 <PowTough card={card} handleGetCard={handleGetCard} />
               )}
-            </div>
-            <div>
-              {/* <Image className="pip" src={blackManaImage} alt="Black Mana" />
-              <Image className="pip" src={redManaImage} alt="Red Mana" />
-              <Image className="pip" src={greenManaImage} alt="Green Mana" />
-              <Image className="pip" src={blueManaImage} alt="Blue Mana" />
-              <Image className="pip" src={whiteManaImage} alt="White Mana" /> */}
+              {selectedGameType === "ManaValue" && (
+                <ManaValue
+                  manaCost={card ? card.manaCost : ""}
+                  selectedGameType={selectedGameType}
+                  loadNewCard={handleGetCard}
+                />
+              )}
             </div>
           </div>
         </div>
