@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function SetName({ setCode, handleGetSet }) {
   const [guesses, setGuesses] = useState([]);
   const [result, setResult] = useState("");
-  const [remainingAttempts, setRemainingAttempts] = useState(3);
+  const [remainingAttempts, setRemainingAttempts] = useState(5);
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [showSetName, setShowSetName] = useState(false);
-  const [isCorrectSet, setIsCorrectSet] = useState(false); // New state variable
+  const [isCorrectSet, setIsCorrectSet] = useState(false);
 
   useEffect(() => {
     initializeGame();
@@ -16,13 +16,26 @@ export default function SetName({ setCode, handleGetSet }) {
     if (!setCode) {
       return;
     }
-    const formattedGuesses = Array(setCode.length).fill("_");
+    const formattedGuesses = setCode.split("").map((char) => {
+      if (char.match(/[a-z]/i)) {
+        return "_";
+      } else if (
+        char === " " ||
+        char === "'" ||
+        char === ":" ||
+        char === "." ||
+        char === ","
+      ) {
+        return char;
+      }
+      return "";
+    });
     setGuesses(formattedGuesses);
     setResult("");
-    setRemainingAttempts(3);
+    setRemainingAttempts(5);
     setGuessedLetters([]);
     setShowSetName(false);
-    setIsCorrectSet(false); // Reset the correct set state
+    setIsCorrectSet(false);
   };
 
   const handleLetterClick = (letter) => {
@@ -43,9 +56,9 @@ export default function SetName({ setCode, handleGetSet }) {
         if (newGuesses.join("") === setCode.toUpperCase()) {
           setResult("Congratulations! You guessed it right!");
           setShowSetName(true);
-          setIsCorrectSet(true); // Set correct set state to true
+          setIsCorrectSet(true);
           setTimeout(() => {
-            handleGetSet(); // Reset the game after a delay
+            handleGetSet();
           }, 2000);
         }
       } else {
@@ -54,7 +67,7 @@ export default function SetName({ setCode, handleGetSet }) {
           setResult("Game over! You're out of attempts.");
           setShowSetName(true);
           setTimeout(() => {
-            handleGetSet(); // Reset the game after a delay
+            handleGetSet();
           }, 2000);
         } else {
           setResult("Incorrect guess!");
