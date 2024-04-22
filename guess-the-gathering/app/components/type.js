@@ -50,32 +50,38 @@ export default function Type({ card, handleGetCard }) {
   }, [card]);
 
   return (
-    <div className="flex flex-col items-center">
-      <h2 className="text-2xl font-bold mb-4">Guess the Card Type</h2>
-      <div className="mb-4">
-        <select
-          value={selectedType}
-          onChange={handleTypeSelection}
-          className="px-3 py-2 border rounded-md"
-          style={{ color: "black" }} // Set text color to black
+    <div className="min-h-96 min-w-12">
+      <h1 className="font-bold p-4 py-2 px-4 mint-text text-center text-5xl">
+        Guess the Card Type
+      </h1>
+      <div className="flex flex-col justify-center items-center mt-32">
+        <div className="mb-4">
+          <select
+            value={selectedType}
+            onChange={handleTypeSelection}
+            className="px-3 py-2 border rounded-md"
+            style={{ color: "black" }} // Set text color to black
+          >
+            <option value="">Select a card type</option>
+            {cardTypes.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button
+          onClick={handleGuess}
+          disabled={!selectedType || attempts === 0}
+          className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-xl mt-4"
         >
-          <option value="">Select a card type</option>
-          {cardTypes.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
+          Guess
+        </button>
+        <p className="text-lg mt-4  text-black">{result}</p>
+        <p className="text-lg mt-4 text-black">
+          Remaining attempts: {attempts}
+        </p>
       </div>
-      <button
-        onClick={handleGuess}
-        disabled={!selectedType || attempts === 0}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Guess
-      </button>
-      <p className="text-lg mt-4">{result}</p>
-      <p className="text-lg mt-4">Remaining attempts: {attempts}</p>
     </div>
   );
 }
