@@ -9,6 +9,7 @@ import GameTypes from "./game-types/game-type-list";
 import PowTough from "./components/pow-tough";
 import CardName from "./components/card-name";
 import SetName from "./components/set";
+import Type from "./components/type";
 import ManaValue from "./components/mana-value";
 import mtgLogo from "../public/images/mtg.png";
 
@@ -33,14 +34,7 @@ export default function Page() {
     }
   }, [card]);
 
-  const gameTypes = [
-    "Name",
-    "Set",
-    "ManaValue",
-    "Rarity",
-    "Type",
-    "Power/Toughness",
-  ];
+  const gameTypes = ["Name", "Set", "ManaValue", "Type", "Power/Toughness"];
 
   return (
     <main className="flex justify-center tiffany min-h-screen font-beleren">
@@ -139,6 +133,9 @@ export default function Page() {
                   selectedGameType={selectedGameType}
                   loadNewCard={handleGetCard}
                 />
+              )}
+              {selectedGameType === "Type" && (
+                <Type card={card} handleGetCard={handleGetCard} />
               )}
             </div>
           </div>
