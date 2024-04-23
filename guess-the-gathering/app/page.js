@@ -101,6 +101,14 @@ export default function Page() {
                   )}
                 </div>
               </div>
+              <div className="flex justify-center ml-16">
+                <button
+                  className="bg-slate-900 hover:bg-slate-800 w-40 text-white font-bold py-2 px-4 rounded-xl mr-16"
+                  onClick={handleGetCard}
+                >
+                  Get Card
+                </button>
+              </div>
             </div>
             <div className="flex flex-col justify-center w-full items-center">
               <div className="flex custom-width justify-center mt-10">
@@ -129,6 +137,9 @@ export default function Page() {
               </div>
               <div className="flex justify-center items-end mt-8">
                 <div className="mint-text mb-2">
+                  <p className="spacing text-2xl">
+                    To start a game, click the "Get Card" button
+                  </p>
                   <h2 className="text-xl font-semibold">Rules</h2>
                   <div className="mt-2 text-sm">
                     <p className="spacing">

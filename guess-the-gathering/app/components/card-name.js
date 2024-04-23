@@ -1,36 +1,36 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export default function CardName({ card, handleGetCard }) {
   const [guesses, setGuesses] = useState([]);
   const [result, setResult] = useState("");
   const [remainingAttempts, setRemainingAttempts] = useState(5);
   const [guessedLetters, setGuessedLetters] = useState([]);
+  const [incorrectGuesses, setIncorrectGuesses] = useState([]);
   const [showCardName, setShowCardName] = useState(false);
 
   useEffect(() => {
-    if (!card) {
+    if (card) {
       initializeGame();
     }
   }, [card]);
 
   const initializeGame = () => {
-    handleGetCard();
-    if (card) {
-      const cleanedCardName = card.name.toLowerCase();
-      const initialGuesses = cleanedCardName.split("").map((char) => {
-        if (char.match(/[a-z]/i)) {
-          return "_";
-        } else if (char === " " || char === "'") {
-          return char;
-        }
-        return "";
-      });
-      setGuesses(initialGuesses);
-      setResult("");
-      setRemainingAttempts(5);
-      setGuessedLetters([]);
-      setShowCardName(false);
-    }
+    const cleanedCardName = card.name.toLowerCase();
+    const formattedGuesses = cleanedCardName.split("").map((char) => {
+      if (char.match(/[a-z]/i)) {
+        return "_";
+      } else if (char === " " || char === "'") {
+        return char;
+      }
+      return "";
+    });
+
+    setGuesses(formattedGuesses);
+    setResult("");
+    setRemainingAttempts(5);
+    setGuessedLetters([]);
+    setIncorrectGuesses([]);
+    setShowCardName(false);
   };
 
   const handleLetterClick = (letter) => {
@@ -38,7 +38,7 @@ export default function CardName({ card, handleGetCard }) {
     if (!card) {
       return;
     }
-    const cleanedCardName = card.name.toLowerCase().replace(/[\s']/g, "");
+    const cleanedCardName = card.name.toLowerCase().replace(/[\s']/g, ""); // Remove spaces and apostrophes
     if (!guessedLetters.includes(lowerCaseLetter)) {
       setGuessedLetters([...guessedLetters, lowerCaseLetter]);
       if (cleanedCardName.includes(lowerCaseLetter)) {
@@ -57,7 +57,7 @@ export default function CardName({ card, handleGetCard }) {
           setResult("Congratulations! You guessed it right!");
           setShowCardName(true);
           setTimeout(() => {
-            initializeGame(); // Reset the game after a delay
+            handleGetCard(); // Reset the game after a delay
           }, 2000);
         }
       } else {
@@ -66,7 +66,7 @@ export default function CardName({ card, handleGetCard }) {
           setResult("Game over! You're out of attempts.");
           setShowCardName(true);
           setTimeout(() => {
-            initializeGame(); // Reset the game after a delay
+            handleGetCard(); // Reset the game after a delay
           }, 2000);
         } else {
           setResult("Incorrect guess!");
@@ -127,6 +127,9 @@ export default function CardName({ card, handleGetCard }) {
     );
   };
 
+  const renderIncorrectGuesses = () => {
+    return null;
+  };
   return (
     <div className="min-h-96 min-w-12 max-alphabet">
       <h1 className="font-bold p-4 py-2 px-4 mint-text text-center text-5xl">
@@ -142,7 +145,7 @@ export default function CardName({ card, handleGetCard }) {
         {showCardName && (
           <div className="mt-2">
             <p className="text-black text-center">
-              The correct name is: {card.name}
+              The correct name is: {name}
             </p>
           </div>
         )}
