@@ -22,9 +22,20 @@ export default function Type({ card, handleGetCard }) {
     setSelectedType(event.target.value);
   };
 
-  // Function to handle the user's guess
   const handleGuess = () => {
-    if (selectedType === card.type) {
+    // Convert card type to lowercase for case-insensitive comparison
+    const lowercaseCardType = card.type.toLowerCase();
+    
+    // Split selected type and card type into arrays of words
+    const selectedTypeWords = selectedType.toLowerCase().split(' ');
+    const cardTypeWords = lowercaseCardType.split(' ');
+  
+    // Check if any word in the selected type matches any word in the card type
+    const isCorrectGuess = selectedTypeWords.some(selectedWord =>
+      cardTypeWords.some(cardWord => cardWord.includes(selectedWord))
+    );
+  
+    if (isCorrectGuess) {
       setResult("Congratulations! You guessed it right!");
       setTimeout(() => {
         handleGetCard(); // Fetch a new card after a delay
@@ -78,7 +89,7 @@ export default function Type({ card, handleGetCard }) {
           Check Guess
         </button>
         <p className="mt-4 text-black">{result}</p>
-        <p className=" text-black">Remaining attempts: {attempts}</p>
+        <p className="text-black">Remaining attempts: {attempts}</p>
       </div>
     </div>
   );
