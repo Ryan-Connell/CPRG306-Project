@@ -54,7 +54,7 @@ export default function Type({ card, handleGetCard }) {
       <h1 className="font-bold p-4 py-2 px-4 mint-text text-center text-5xl">
         Guess the Card Type
       </h1>
-      <div className="flex flex-col justify-center items-center mt-32">
+      <div className="flex flex-col justify-center items-center mt-20">
         <div className="mb-4">
           <select
             value={selectedType}
@@ -75,12 +75,10 @@ export default function Type({ card, handleGetCard }) {
           disabled={!selectedType || attempts === 0}
           className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded-xl mt-4"
         >
-          Guess
+          Check Guess
         </button>
-        <p className="text-lg mt-4  text-black">{result}</p>
-        <p className="text-lg mt-4 text-black">
-          Remaining attempts: {attempts}
-        </p>
+        <p className="mt-4 text-black">{result}</p>
+        <p className=" text-black">Remaining attempts: {attempts}</p>
       </div>
     </div>
   );

@@ -89,7 +89,7 @@ export default function ManaValue({
       <h1 className="font-bold p-4 py-2 px-4 mint-text text-center text-5xl">
         Guess the Mana Value
       </h1>
-      <div className="flex flex-col justify-center items-center mt-32">
+      <div className="flex flex-col justify-center items-center mt-20">
         <div className="mana-value">
           <div className="mana-buttons">
             {/* Buttons for selecting mana types */}
@@ -185,7 +185,7 @@ export default function ManaValue({
               font-weight: bold-900;
             }
             .feedback {
-              margin-top: 10px;
+              margin-top: 2px;
               font-weight: bold;
             }
             .buttons-container {
@@ -203,7 +203,7 @@ export default function ManaValue({
               color: white;
             }
             .attempts-remaining {
-              margin-top: 10px;
+              margin-top: 4px;
             }
           `}</style>
         </div>

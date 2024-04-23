@@ -52,7 +52,7 @@ export default function PowTough({ card, handleGetCard }) {
       <h1 className="font-bold p-4 py-2 px-4 mint-text text-center text-5xl">
         Guess the Power/Toughness
       </h1>
-      <div className="flex flex-col justify-center items-center mt-32">
+      <div className="flex flex-col justify-center items-center mt-20">
         <div className="mt-4">
           <input
             className="text-black text-xl text-center w-20 h-8 mr-1 border-2 border-slate-800 rounded-xl"

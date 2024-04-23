@@ -128,19 +128,19 @@ export default function CardName({ card, handleGetCard }) {
   };
 
   return (
-    <div className="min-h-96 min-w-12">
+    <div className="min-h-96 min-w-12 max-alphabet">
       <h1 className="font-bold p-4 py-2 px-4 mint-text text-center text-5xl">
         Guess the Name
       </h1>
-      <div className="flex flex-col justify-center items-center mt-32">
+      <div className="flex flex-col justify-center items-center mt-8">
         <div className="mt-4 embiggen">{renderHangmanWord()}</div>
         <div className="mt-4 text-2xl">{renderAlphabet()}</div>
         <p className="text-black text-center mt-4">{result}</p>
-        <p className="text-black text-center mt-4">
+        <p className="text-black text-center mt-2">
           Remaining Attempts: {remainingAttempts}
         </p>
         {showCardName && (
-          <div className="mt-4">
+          <div className="mt-2">
             <p className="text-black text-center">
               The correct name is: {card.name}
             </p>
