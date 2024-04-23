@@ -98,9 +98,9 @@
 .pt-blur {
   background-color: rgb(17 24 39 / var(--tw-bg-opacity));
   border: 3px groove rgb(192, 192, 192);
-    margin-top: 285px;
-    margin-left: 18px;
-    width: 60px;
+    margin-top: 280px;
+    margin-left: 12px;
+    width: 70px;
   }
 .name-dashes{
     margin-left: 4px;
@@ -119,4 +119,10 @@
 }
 .embiggen{
   font-size: 36px;;
+}
+.max-alphabet{
+  width: 75%;
+}
+.spacing{
+  margin-bottom: 3px;
 }
