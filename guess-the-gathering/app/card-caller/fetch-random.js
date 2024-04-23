@@ -1,18 +1,16 @@
 export async function fetchRandomCard() {
-  let cardFound = false;
-  let data = null;
+  let card = null;
 
-  while (!cardFound) {
+  while (!card) {
     console.log(`Fetching a random card`);
     const response = await fetch(
       `https://api.magicthegathering.io/v1/cards?random=true&pageSize=1`
     );
 
     if (response.ok) {
-      data = await response.json();
+      const data = await response.json();
       if (data.cards && data.cards.length > 0) {
-        cardFound = true;
-        data.card = data.cards[0]; // Store the card in data.card for consistency with the previous function
+        card = data.cards[0];
       } else {
         console.log("Card not found, retrying...");
       }
@@ -21,5 +19,5 @@ export async function fetchRandomCard() {
     }
   }
 
-  return data.card;
+  return card;
 }
