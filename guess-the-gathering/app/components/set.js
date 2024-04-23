@@ -129,7 +129,7 @@ export default function SetName({ setCode, handleGetSet }) {
   };
 
   return (
-    <div className="min-h-96 min-w-12">
+    <div className="min-h-96 min-w-12" onClick={handleGetSet}>
       <h1 className="font-bold p-4 py-2 px-4 mint-text text-center text-5xl">
         Guess the Set
       </h1>

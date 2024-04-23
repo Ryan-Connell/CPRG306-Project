@@ -23,9 +23,6 @@ export default function Page() {
     const newCard = await fetchRandomCard();
     setCard(newCard);
   };
-  function handlePageReset() {
-    window.location.reload();
-  }
 
   useEffect(() => {
     if (card) {
@@ -43,7 +40,7 @@ export default function Page() {
     <main className="flex justify-center tiffany min-h-screen font-beleren">
       <div className="flex flex-col mint custom-width mt-2 rounded-lg">
         <div className="text-center custom-width mt-4 ml-20 p-4 rounded-2xl fairy-tail flex justify-center items-center">
-          <button onClick={() => handlePageReset()}>
+          <button onClick={() => window.location.reload()}>
             <Image className="mr-8 w-16 h-16" src={mtgLogo} alt="MTG Logo" />
           </button>
           <h1 className="text-5xl">Guess the Gathering</h1>
@@ -105,21 +102,6 @@ export default function Page() {
                     <div className="absolute h-6 pt-blur inset-y-12 inset-x-44 rounded-xl"></div>
                   )}
                 </div>
-              </div>
-              {/* this section is for debugging purposes */}
-              <div className="flex">
-                <button
-                  className="bg-slate-900 hover:bg-slate-800 w-40 text-white font-bold py-2 px-4 rounded-xl mr-16"
-                  onClick={handleGetCard}
-                >
-                  Get Card
-                </button>
-                <button
-                  className="bg-slate-900 hover:bg-slate-800 w-40 text-white font-bold py-2 px-4 rounded-xl"
-                  onClick={() => setIsBlurVisible(!isBlurVisible)}
-                >
-                  Toggle Blur
-                </button>
               </div>
             </div>
             <div className="flex custom-width justify-center mt-16">
